@@ -99,20 +99,6 @@ long Segment_Tree::query(long l, long r, long ll, long rr, long cur) {
 Segment_Tree u;
 int main()
 {
-	u.initialize();
-	long t;
-	cin >> t;
-	long a, b, c, d;
-	FOR(i, 1, t) {
-		cin >> a;
-		if (a == 1) {
-			cin >> b >> c >> d;
-			u.update(b, c, d);
-		}
-		else {
-			cin >> b >> c;
-			cout << u.query(b, c) << endl;
-		}
-	}
+	
 	return 0;
 }
