@@ -5,3 +5,4 @@
 如果有错欢迎dalao指出orz
 
 1.线段树
+2.tarjan
