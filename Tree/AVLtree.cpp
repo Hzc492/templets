@@ -17,6 +17,7 @@ public:
 	avl() :root(nullptr), taller(false), shorter(false) {};
 	bool search() { search(root); }
 	void insert() { insert(root); taller = false; }
+	void remove() { remove(root); shorter = false; }
 	void pre_order() { if (root) pre_order(root); cout << endl; }
 	void middle_order() { if (root) middle_order(root); cout << endl; }
 	void post_order() { if (root) post_order(root); cout << endl; }
@@ -25,6 +26,7 @@ public:
 private:
 	bool search(u *y);
 	void insert(u* &y);
+	void remove(u* &y);
 	void pre_order(u *y);
 	void middle_order(u *y);
 	void post_order(u *y);
@@ -71,6 +73,11 @@ void avl::r_balance(u* &y) {
 		y->st = 0;
 		y->lt->st = 0;
 	}
+	else if (y->rt->st == 0) {
+		rl_rot(y);
+		y->st = -1;
+		y->lt->st = 1;
+	}
 	else {
 		rr_rot(y->rt);
 		rl_rot(y);
@@ -92,6 +99,11 @@ void avl::l_balance(u* &y) {
 		lr_rot(y);
 		y->st = 0;
 		y->rt->st = 0;
+	}
+	else if (y->lt->st == 0) {
+		lr_rot(y);
+		y->st = -1;
+		y->rt->st = 1;
 	}
 	else {
 		ll_rot(y->lt);
@@ -152,6 +164,64 @@ void avl::insert(u* &y) {
 		}
 	}
 }
+void avl::remove(u* &y) {
+	if (y->n == x) {
+		u *tmp = y;
+		if (!y->lt) {
+			y = y->rt;
+			delete tmp;
+			shorter = true;
+			return;
+		}
+		else if (!y->rt) {
+			y = y->lt;
+			delete tmp;
+			shorter = true;
+			return;
+		}
+		else {
+			tmp = tmp->lt;
+			while (tmp->rt) tmp = tmp->rt;
+			x = tmp->n;
+			y->n = x;
+			remove(y->lt);
+		}
+	}
+	else if (x < y->n) {
+		remove(y->lt);
+	}
+	else {
+		remove(y->rt);
+	}
+	if (shorter) {
+		if (x <= y->n) {
+			if (y->st == -1) {
+				y->st = 0;
+			}
+			else if (y->st == 0) {
+				y->st = 1;
+				shorter = false;
+			}
+			else {
+				if (y->rt->st == 0) shorter = false;
+				r_balance(y);
+			}
+		}
+		else {
+			if (y->st == 1) {
+				y->st = 0;
+			}
+			else if (y->st == 0) {
+				y->st = -1;
+				shorter = false;
+			}
+			else {
+				if (y->lt->st == 0) shorter = false;
+				l_balance(y);
+			}
+		}
+	}
+}
 bool avl::search(u *y) {
 	if (!y) return false;
 	if (x == y->n) return true;
@@ -186,10 +256,15 @@ int avl::height() {
 avl tree;
 int main()
 {
-	FORD(i, 1000, 1) tree.set_target(i).insert();
-	tree.pre_order();
+	FOR(i, 1, 10000) tree.set_target(i).insert();
+	//tree.pre_order();
 	tree.middle_order();
-	tree.post_order();
+	//tree.post_order();
+	cout << tree.height() << endl;
+	for (int i = 1; i <= 10000; i++, i++) tree.set_target(i).remove();
+	//tree.pre_order();
+	tree.middle_order();
+	//tree.post_order();
 	cout << tree.height() << endl;
 	return 0;
 }
