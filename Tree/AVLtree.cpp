@@ -50,8 +50,8 @@ void avl::rl_rot(u* &y) {
 void avl::rr_rot(u* &y) {
 	u *tmp1 = y->lt->rt;
 	u *tmp2 = y->lt;
-	y->rt->lt = y;
-	y->rt = tmp1;
+	y->lt->rt = y;
+	y->lt = tmp1;
 	y = tmp2;
 }void avl::lr_rot(u* &y) {
 	u *tmp1 = y->lt->rt;
@@ -63,8 +63,8 @@ void avl::rr_rot(u* &y) {
 void avl::ll_rot(u* &y) {
 	u *tmp1 = y->rt->lt;
 	u *tmp2 = y->rt;
-	y->lt->rt = y;
-	y->lt = tmp1;
+	y->rt->lt = y;
+	y->rt = tmp1;
 	y = tmp2;
 }
 void avl::r_balance(u* &y) {
@@ -92,6 +92,7 @@ void avl::r_balance(u* &y) {
 			y->lt->st = 0;
 			y->rt->st = 1;
 		}
+		y->st = 0;
 	}
 }
 void avl::l_balance(u* &y) {
@@ -119,6 +120,7 @@ void avl::l_balance(u* &y) {
 			y->rt->st = 0;
 			y->lt->st = 1;
 		}
+		y->st = 0;
 	}
 }
 void avl::insert(u* &y) {
@@ -256,15 +258,11 @@ int avl::height() {
 avl tree;
 int main()
 {
-	FOR(i, 1, 10000) tree.set_target(i).insert();
-	//tree.pre_order();
+	int a;
+	while (cin >> a, a) tree.set_target(a).insert();
+	tree.pre_order();
 	tree.middle_order();
-	//tree.post_order();
-	cout << tree.height() << endl;
-	for (int i = 1; i <= 10000; i++, i++) tree.set_target(i).remove();
-	//tree.pre_order();
-	tree.middle_order();
-	//tree.post_order();
+	tree.post_order();
 	cout << tree.height() << endl;
 	return 0;
 }
