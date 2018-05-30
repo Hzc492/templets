@@ -30,13 +30,13 @@ private:
 	void pre_order(u *y);
 	void middle_order(u *y);
 	void post_order(u *y);
-	bool taller, shorter;
 	void r_balance(u* &y);
 	void l_balance(u* &y);
 	void rr_rot(u* &y);
 	void rl_rot(u* &y);
 	void lr_rot(u* &y);
 	void ll_rot(u* &y);
+	bool taller, shorter;
 	u *root;
 	int x;
 };
@@ -231,19 +231,19 @@ bool avl::search(u *y) {
 	else return search(y->rt);
 }
 void avl::pre_order(u *y) {
-	cout << y->n << " ";
+	cout << (char)y->n << " ";
 	if (y->lt) pre_order(y->lt);
 	if (y->rt) pre_order(y->rt);
 }
 void avl::middle_order(u *y) {
 	if (y->lt) middle_order(y->lt);
-	cout << y->n << " ";
+	cout << (char)y->n << " ";
 	if (y->rt) middle_order(y->rt);
 }
 void avl::post_order(u *y) {
 	if (y->lt) post_order(y->lt);
 	if (y->rt) post_order(y->rt);
-	cout << y->n << " ";
+	cout << (char)y->n << " ";
 }
 int avl::height() {
 	u *p = root;
@@ -258,11 +258,20 @@ int avl::height() {
 avl tree;
 int main()
 {
-	int a;
-	while (cin >> a, a) tree.set_target(a).insert();
-	tree.pre_order();
-	tree.middle_order();
-	tree.post_order();
-	cout << tree.height() << endl;
+	int order;
+	char ch;
+	while (cin >> order) {
+		if (order==3) {
+			tree.pre_order();
+			tree.middle_order();
+			tree.post_order();
+		}
+		else {
+			cin >> ch;
+			if (order == 1) tree.set_target(ch).insert();
+			else tree.set_target(ch).remove();
+		}
+	}
+	//cout << tree.height() << endl;
 	return 0;
 }
