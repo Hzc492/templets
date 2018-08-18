@@ -5,7 +5,7 @@ using LL=long long;
 #define FORD(i,x,y) for(decay<decltype(x)>::type i=(x),_##i=(y);i>=_##i;--i)
 #define mem(f,x) memset(f,x,sizeof(f))
 //=======================================================
-void hin(long &res){
+void hin(int &res){
     char ch;
     bool flag=false;
     while (!isdigit(ch=getchar()))
@@ -13,7 +13,7 @@ void hin(long &res){
     for (res=ch-'0';isdigit(ch=getchar());res=res*10+ch-'0');
     if (flag) res=-res;
 }
-void hout(long x){
+void hout(int x){
     if (x<0){
         putchar('-');
         x=-x;
@@ -22,7 +22,7 @@ void hout(long x){
     putchar(x%10+'0');
 }
 int main(){
-    long n;
+    int n;
     hin(n);
     hout(n);
 }
