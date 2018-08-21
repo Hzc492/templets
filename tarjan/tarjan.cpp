@@ -1,10 +1,4 @@
-#include<bits/stdc++.h>
-using namespace std;
-using LL=long long;
-#define FOR(i,x,y) for(decay<decltype(y)>::type i=(x),_##i=(y);i<=_##i;++i)
-#define FORD(i,x,y) for(decay<decltype(x)>::type i=(x),_##i=(y);i>=_##i;--i)
-#define mem(f,x) memset(f,x,sizeof(f))
-//=======================================================
+/*tarjan求强连通分量*/
 long r[10005];
 int fa[10005],low[10005],dnf[10005];
 bool st[10005],hst[10005];
