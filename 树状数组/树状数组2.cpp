@@ -1,10 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
-using LL = long long;
-#define FOR(i, x, y) for (decay<decltype(y)>::type i = (x), _##i = (y); i <= _##i; ++i)
-#define FORD(i, x, y) for (decay<decltype(x)>::type i = (x), _##i = (y); i >= _##i; --i)
-#define mem(f,x) memset(f,x,sizeof(f))
-//========================================================================
+/*树状数组 区间更新+单点查询*/
+/*编号为[1..n][1..n]*/
 const int Max = 500000;
 int c[Max + 5];
 int n;
@@ -26,6 +21,8 @@ int main()
 	int m;
 	cin >> n >> m;
 	int a, b, c, d;
+	
+	//读入并赋初始值
 	scanf_s("%d", &b);
 	upgrade(1, b);
 	FOR(i, 2, n) {
@@ -33,6 +30,7 @@ int main()
 		upgrade(i, a - b);
 		b = a;
 	}
+	
 	while (m--) {
 		scanf_s("%d", &a);
 		if (a == 1) {
