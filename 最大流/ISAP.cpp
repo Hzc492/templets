@@ -1,10 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
-using LL = long long;
-#define FOR(i, x, y) for (decay<decltype(y)>::type i = (x), _##i = (y); i <= _##i; ++i)
-#define FORD(i, x, y) for (decay<decltype(x)>::type i = (x), _##i = (y); i >= _##i; --i)
-#define mem(f,x) memset(f,x,sizeof(f))
-//========================================================================
+/*最大流 ISAP
+ *re为反向边
+ *基于分层思想的最大流算法。省去了Dinic每次增广后需要重新构建分层图的麻烦，而是在每次增广完成后自动更新每个点的标号（也就是所
+在的层）
+ *渐进时间复杂度和dinic相同，但是非二分图的情况下isap更具优势*/
 const int inf = 0x7fffffff;
 const int MAX = 10005;
 struct u {

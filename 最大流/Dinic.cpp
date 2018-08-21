@@ -1,10 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
-using LL = long long;
-#define FOR(i, x, y) for (decay<decltype(y)>::type i = (x), _##i = (y); i <= _##i; ++i)
-#define FORD(i, x, y) for (decay<decltype(x)>::type i = (x), _##i = (y); i >= _##i; --i)
-#define mem(f,x) memset(f,x,sizeof(f))
-//========================================================================
+/*最大流 Dinic
+ *分层思想 在一次bfs里dfs到底
+ *re为反向边
+ *在普通情况下， DINIC算法时间复杂度为O(V2E) 
+ *在二分图中， DINIC算法时间复杂度为O(sqrt(V)·E)*/
 const int MAX = 10005;
 const int inf = 0x7fffffff;
 struct u {
@@ -64,9 +62,12 @@ int main()
 		head[a]->re = head[b];
 		head[b]->re = head[a];
 	}
+	
+	//核心
 	while (bfs()) {
 		while (tmp = dfs(s, inf)) ans += tmp;
 	}
+	
 	cout << ans << endl;
 	return 0;
 }
